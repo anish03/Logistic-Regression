@@ -25,8 +25,8 @@ neg = np.array([X[i] for i in xrange(X.shape[0]) if y[i]==0])
 
 def plot_data():
     plt.figure(figsize=(10,8))
-    plt.plot(pos[:,1],pos[:,2],'ro',label='Exam 1')
-    plt.plot(neg[:,1],neg[:,2],'yo',label='Exam 2')
+    plt.plot(pos[:,1],pos[:,2],'ro',label='Admitted')
+    plt.plot(neg[:,1],neg[:,2],'yo',label='Not Admitted')
     plt.xlabel('Exam 1 Score')
     plt.ylabel('Exam 2 Score')
     plt.legend()
