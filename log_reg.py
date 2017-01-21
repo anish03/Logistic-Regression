@@ -6,7 +6,7 @@ plt.style.use('dark_background')
 import pandas as pd
 
 
-datafile = 'ex2data1.txt'
+datafile = 'datafile.txt'
 
 data = np.loadtxt(datafile,delimiter=',',usecols=(0,1,2),unpack=True)
 
