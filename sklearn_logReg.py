@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn import linear_model
 plt.style.use('fivethirtyeight')
 
-datafile = 'ex2data1.txt'
+datafile = 'datafile.txt'
 data = np.loadtxt(datafile,delimiter=',',usecols=(0,1,2),unpack=True)
 
 X = np.transpose(np.array(data[:-1]))
