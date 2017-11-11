@@ -1,0 +1,48 @@
+{% extends "dataVIZ/layout.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<style>
+
+    .spacing{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+</style>
+
+
+
+<br/><br/>
+<div class="container">
+    <div class="row col-md-6 col-md-offset-3">
+        <h1>Student Information</h1>
+    
+        
+    <form style="margin-top:40px;" method="post" action="" enctype="multipart/form-data">
+        <!--{{form.as_p}}-->
+        {% csrf_token %}
+        
+            {% for field in form %}
+            {{field.label_tag}}
+            
+            {% if field.errors %}
+                <div class="alert alert-danger" role="alert">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                      <span class="sr-only">Error:</span>
+                        {{field.errors}}
+                </div>
+            {% endif %}
+        
+            {{ field | add_class:"form-control" | add_class:"spacing"}}
+        
+        
+        {% endfor %}          
+        <input style="margin-top:50px;" type="submit" value="Save" class="btn btn-primary btn-lg btn-block">
+    </form>
+    </div>
+  </div>
+
+{% endblock %}

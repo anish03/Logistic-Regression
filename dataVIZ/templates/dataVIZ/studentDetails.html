@@ -1,0 +1,71 @@
+{% extends "dataVIZ/layout.html" %}
+
+{% block content %}
+<div style="margin-left:50px;" class="page-header">
+  <h1>{{student.firstname}} <small>{{student.lastname}}</small></h1>
+</div>
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous">
+</script>
+
+<div id="container" style="min-width: 310px; height: 500px; margin: 0 auto">
+
+</div>
+
+<script>
+
+$(function () {
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Test Performance'
+        },
+        xAxis: {
+            categories: [
+                'Subjects'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max: 100,
+            title: {
+                text: 'Exam Score (out of 100)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Exam 1 Score',
+            data: [{{student.exam1_marks}}]
+
+        }, {
+            name: 'Exam 2 Score',
+            data: [{{student.exam2_marks}}]
+        }]
+    });
+});
+
+</script>
+
+{% endblock %}

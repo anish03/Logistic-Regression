@@ -1,0 +1,48 @@
+{% extends "dataVIZ\layout.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row col-md-6 col-md-offset-3" style="padding-bottom:50px;">
+        <h1>Student Information</h1>
+    </div>
+    
+    <form method="post">
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <label for="First Name">First Name</label>
+                <input type="name" class="form-control" id="firstName" placeholder="First Name/Given Name">
+            </div>
+            
+            <div class="form-group">
+                <label for="Last Name">Last Name</label>
+                <input type="name" class="form-control" id="lastName" placeholder="Last Name">
+            </div>
+            
+            <div class="form-group">
+                <label for="Marks 1">Marks for Exams 1</label>
+                <input type="number" min="0" max="100" class="form-control" id="exam1_marks" placeholder="Exam 1 Marks">
+            </div>
+                
+            <div class="form-group">
+                <label for="Marks 2">Marks for Exams 2</label>
+                <input type="number" min="0" max="100" class="form-control" id="exam2_marks" placeholder="Exam 2 Marks">
+            </div>
+            
+            <input style="margin-top:50px;" type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+            
+        </div>
+        
+        
+    </form>
+    
+  
+  </div>
+</div>
+</div>
+
+{% endblock %}
+<!--
+
+
+-->

@@ -1,0 +1,115 @@
+{% extends "dataVIZ/layout.html" %}
+
+{% block content %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Student Records</title>
+
+<style>
+    .table td{
+        text-align: center;
+    }
+
+    .table th{
+        text-align: center;
+        height:30px;
+    }
+
+    tr{
+        cursor: pointer;
+        height: 70px;
+    }
+
+    .paginator_style{
+        position: relative;
+        top: 50%;
+        margin-top: 10px;
+        margin-left: 45%;
+    }
+
+
+    table{
+        border: none;
+    }
+
+</style>
+
+</head>
+<br/><br/>
+    <!---->
+    <!--<tr onclick="window.location='/studentDetails/{{student.id}}/'">-->
+    <table id="datatable" class="table table-hover table-striped" >
+    <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Exam 1 Score</th>
+                <th>Exam 2 Score</th>
+                <th>Action</th>
+
+    </thead>
+        {% for student in all_students %}
+        <tr >
+            <td onclick="window.location='/studentDetails/{{student.id}}/'">{{student.firstname}}</td>
+            <td onclick="window.location='/studentDetails/{{student.id}}/'">{{student.lastname}}</td>
+            <td onclick="window.location='/studentDetails/{{student.id}}/'">{{student.exam1_marks}}</td>
+            <td onclick="window.location='/studentDetails/{{student.id}}/'">{{student.exam2_marks}}</td>
+            <td>
+                <form action="{% url 'dataVIZ:delete-student' student.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="student_id" value="{{student.id}}"/>
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
+
+                <div style="display:inline;">
+                    <button onclick="window.location='/update/{{student.id}}/'" type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+
+                </div>
+                <div style="display:inline;">
+                    <button onclick="window.location='/predict/{{student.id}}/'" type="button" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-stats" style="font-family: Helvetica;"> Predict</span>
+                    </button>
+
+                </div>
+            </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+    <div class="paginator_style">
+
+        {% if is_paginated %}
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+              {% if page_obj.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
